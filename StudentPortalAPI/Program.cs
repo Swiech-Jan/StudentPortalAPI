@@ -13,6 +13,17 @@ builder.Services.AddDbContext<StudentPortalContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudentPortalDb"));
 });
 
+builder.Services.AddCors((options) =>
+{
+    options.AddPolicy("angularApplication", (builder)=>
+    {
+        builder.WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .WithMethods("GET", "POST", "PUT", "DELETE")
+        .WithExposedHeaders("*");
+    });
+});
+
 builder.Services.AddScoped<IStudentRepository, SqlStudentRepository>();
 
 
@@ -30,6 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("angularApplication");
 
 app.UseAuthorization();
 
