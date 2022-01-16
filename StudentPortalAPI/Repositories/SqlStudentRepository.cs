@@ -1,5 +1,6 @@
 ﻿using StudentPortalAPI.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace StudentPortalAPI.Repositories
 {
@@ -13,7 +14,7 @@ namespace StudentPortalAPI.Repositories
         }
         public List<Student> GetStudents()
         {
-            return context.Student.ToList();
+            return context.Student.Include(nameof(Gender)).Include(nameof(Address)).ToList();
         }
     }
 }
