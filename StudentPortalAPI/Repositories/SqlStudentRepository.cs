@@ -25,5 +25,9 @@ namespace StudentPortalAPI.Repositories
                 .FirstOrDefaultAsync(x => x.Id == studentId);
         }
 
+        public async Task<List<Gender>> GetGendersAsync()
+        {
+            return await context.Gender.ToListAsync();
+        }
     }
 }
