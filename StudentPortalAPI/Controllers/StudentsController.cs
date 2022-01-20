@@ -19,16 +19,16 @@ namespace StudentPortalAPI.Controllers
 
         [HttpGet]
         [Route("[controller]")]
-        public async Task <IActionResult> GetAllStudentsAsync()
+        public async Task<IActionResult> GetAllStudentsAsync()
         {
-           var students = await studentRepository.GetStudentsAsync();
-            
-           return Ok(mapper.Map<List<Student>>(students));
+            var students = await studentRepository.GetStudentsAsync();
+
+            return Ok(mapper.Map<List<Student>>(students));
         }
 
         [HttpGet]
         [Route("[controller]/{studentId:guid}")]
-        public async  Task<IActionResult> GetStudentAsync([FromRoute]Guid studentId)
+        public async Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
         {
             // Fetch Student Detail
             var student = await studentRepository.GetStudentAsync(studentId);
@@ -39,8 +39,25 @@ namespace StudentPortalAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(mapper.Map<Student>(student));        
+            return Ok(mapper.Map<Student>(student));
 
+        }
+
+        [HttpPut]
+        [Route("[controller]/{studentId:guid}")]
+        public async Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request)
+        {
+            if (await studentRepository.Exists(studentId))
+            {
+                // Update Details
+                var updatedStudent = await studentRepository.UpdateStudent(studentId, mapper.Map<Models.Student>(request));
+
+                if (updatedStudent != null)
+                {
+                    return Ok(mapper.Map<Student>(updatedStudent));
+                }
+            }
+            return NotFound();
         }
     }
 }
