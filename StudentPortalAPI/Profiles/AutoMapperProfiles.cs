@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using StudentAdminPortal.API.DomainModels;
 using StudentAdminPortal.API.Profiles.AfterMaps;
 using StudentPortalAPI.DomainModels;
-using Models = StudentPortalAPI.Models;
+using StudentPortalAPI.Profiles.AfterMaps;
 
 namespace StudentPortalAPI.Profiles
 {
@@ -21,6 +22,8 @@ namespace StudentPortalAPI.Profiles
             CreateMap<UpdateStudentRequest, Models.Student>()
                .AfterMap<UpdateStudentRequestAfterMap>();
 
+            CreateMap<AddStudentRequest, Models.Student>()
+               .AfterMap<AddStudentRequestAfterMap>();
         }
     }
 }
