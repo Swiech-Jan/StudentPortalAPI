@@ -4,7 +4,7 @@
 
 namespace StudentPortalAPI.Migrations
 {
-    public partial class Fix2 : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

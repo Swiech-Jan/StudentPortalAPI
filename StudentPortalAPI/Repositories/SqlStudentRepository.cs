@@ -7,7 +7,6 @@ namespace StudentPortalAPI.Repositories
     public class SqlStudentRepository : IStudentRepository
     {
         private readonly StudentPortalContext context;
-
         public SqlStudentRepository(StudentPortalContext context)
         {
             this.context = context;
@@ -76,6 +75,6 @@ namespace StudentPortalAPI.Repositories
             await context.SaveChangesAsync();
             return student.Entity;
         }
-
     }
-}
+
+ }
